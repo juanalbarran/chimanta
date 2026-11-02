@@ -5,14 +5,22 @@ Working with `ai` means less time typing and more time reading, so the workspace
 
 Several instances of `claude code` run side by side inside `tmux`, each window named after the ticket it is working on.
 
+## Influence
+
+This project has a lot of influence and citation to other projects like:
+
+- [`kukenan`](https://github.com/juanalbarran/kukenan)
+- [`sarisarinama`](https://github.com/juanalbarran/sarisarinama)
+- [`canaima`](https://github.com/juanalbarran/canaima)
+
 ## Tools
 
-| Role        | Tool          | Doc                                          |
-| ----------- | ------------- | -------------------------------------------- |
-| Terminal    | `alacritty`   | [terminal.md](./modules/terminal.md)         |
-| Multiplexer | `tmux`        | [multiplexer.md](./modules/multiplexer.md)   |
-| AI          | `claude code` | [ai.md](./modules/ai.md)                     |
-| Editor      | `kukenan`     | [editor.md](./modules/editor.md)             |
+| Role        | Tool          | Doc                                        |
+| ----------- | ------------- | ------------------------------------------ |
+| Terminal    | `alacritty`   | [terminal.md](./modules/terminal.md)       |
+| Multiplexer | `tmux`        | [multiplexer.md](./modules/multiplexer.md) |
+| AI          | `claude code` | [ai.md](./modules/ai.md)                   |
+| Editor      | `kukenan`     | [editor.md](./modules/editor.md)           |
 
 ## How it is built
 
@@ -36,13 +44,24 @@ To add a tool, add a file to `./modules` and add its package to `modules/chimant
 
 The configs are generated into the nix store and the wrapper (`symlinkJoin` + `wrapProgram`) adds the flag that points to them, so the commands keep their usual names: `alacritty`, `tmux`, `claude`.
 
+## Agent instructions
+
+The instructions for any `ai` agent working on chimanta live in `agents.md`: project context, role, what to read before answering and the rules.
+`claude code` only reads `CLAUDE.md` automatically, so `CLAUDE.md` contains just an import:
+
+```markdown
+@agents.md
+```
+
+`agents.md` stays the single source, edit it and not `CLAUDE.md`.
+
 ## Platforms
 
-| System           | Notes                                                      |
-| ---------------- | ---------------------------------------------------------- |
-| `x86_64-linux`   | Linux and Windows (WSL)                                    |
-| `aarch64-linux`  | Linux and Windows on ARM (WSL)                             |
-| `aarch64-darwin` | Apple silicon macs                                         |
+| System           | Notes                          |
+| ---------------- | ------------------------------ |
+| `x86_64-linux`   | Linux and Windows (WSL)        |
+| `aarch64-linux`  | Linux and Windows on ARM (WSL) |
+| `aarch64-darwin` | Apple silicon macs             |
 
 `x86_64-darwin` (Intel macs) was dropped from nixpkgs unstable in 26.11.
 
